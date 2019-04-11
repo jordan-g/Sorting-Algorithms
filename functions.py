@@ -88,3 +88,31 @@ def insertion_sort(x, plot=False):
 			plotting.set_plot_data(x)
 
 	return x
+
+def binary_search(x, e, l=None, r=None, plot=False):
+	# return the index of element e in x[l:r+1] (or -1 if e is not in x)
+	# where x is a sorted array
+
+	if r is None:
+		r = len(x)
+
+	if l is None:
+		l = 0
+
+	if r < l or len(x) == 0:
+		return -1
+
+	# set index of middle element
+	mid = l + (r - l)//2
+
+	if x[mid] == e:
+		return mid
+
+	if plot:
+		search_array = [ 0 for i in range(0, l) ] + [ 1 for i in range(l, r+1) ] + [ 0 for i in range(r+1, len(x)) ]
+		plotting.set_plot_data(search_array, pause=0.5)
+
+	if x[mid] > e:
+		return binary_search(x, e, l, mid-1, plot=plot)
+	else:
+		return binary_search(x, e, mid+1, r, plot=plot)

@@ -9,7 +9,7 @@ fig.add_axes(ax)
 heatmap = None
 plt.show()
 
-def set_plot_data(x):
+def set_plot_data(x, pause=0.001, cmap='plasma'):
 	global heatmap
 	global fig
 	global ax
@@ -20,11 +20,11 @@ def set_plot_data(x):
 		x = x[np.newaxis, :]
 
 	if heatmap is None:
-		heatmap = ax.imshow(x, aspect='auto')
+		heatmap = ax.imshow(x, aspect='auto', cmap=cmap)
 	else:
 		heatmap.set_data(x)
 		heatmap.set_clim(vmin=np.amin(x), vmax=np.amax(x))
 		heatmap.set_extent((0, x.shape[1], x.shape[0], 0))
 
 	fig.canvas.draw()
-	plt.pause(0.001)
+	plt.pause(pause)
